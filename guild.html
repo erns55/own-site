@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenon_Force</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* লাল এবং কালো গ্রেডিয়েন্ট */
+            background: linear-gradient(135deg, #330000, #000000, #660000);
+            font-family: 'Orbitron', sans-serif;
+            color: #e0e0e0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* লাল বিন্দু */
+            background-image: radial-gradient(circle, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        .profile-card {
+            /* লাল এবং গাঢ় লাল গ্রেডিয়েন্ট */
+            background: linear-gradient(180deg, #5e0a0a, #3c0505);
+            border-radius: 25px;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+            width: 95%;
+            max-width: 450px;
+            /* লাল শ্যাডো */
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.7), 0 0 80px rgba(255, 100, 100, 0.3);
+            /* লাল বর্ডার */
+            border: 2px solid #FF0000;
+            transform: scale(1);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.02);
+        }
+
+        .settings-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 2.2em;
+            /* হালকা লাল */
+            color: #FFB6C1;
+            cursor: pointer;
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            z-index: 2;
+        }
+
+        .settings-icon:hover {
+            /* উজ্জ্বল লাল */
+            color: #FF4500;
+            transform: rotate(90deg);
+        }
+
+        .location-text {
+            position: absolute;
+            top: 100px;
+            left: 30px;
+            font-size: 0.9em;
+            color: #A9A9A9;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+
+        .guild-logo-container {
+            width: 180px;
+            height: 180px;
+            margin: 40px auto 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .guild-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* লাল শ্যাডো */
+            filter: drop-shadow(0 0 15px rgba(255, 100, 100, 0.8));
+            border-radius: 50%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .guild-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .guild-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            /* উজ্জ্বল লাল */
+            color: #FF4500;
+            /* লাল টেক্সট শ্যাডো */
+            text-shadow: 0 0 10px rgba(255, 100, 100, 0.9), 0 0 20px rgba(255, 100, 100, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .guild-id-display {
+            font-size: 1.1em;
+            /* হালকা লাল */
+            color: #FFB6C1;
+            margin-bottom: 30px;
+            min-height: 1.2em;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            /* হালকা লাল শ্যাডো */
+            text-shadow: 0 0 5px rgba(255, 170, 170, 0.5);
+            letter-spacing: 0.5px;
+        }
+
+        .guild-id-display.visible {
+            opacity: 1;
+        }
+
+        .guild-id-display span {
+            margin-left: 10px;
+            cursor: pointer;
+            /* উজ্জ্বল লাল */
+            color: #FF4500;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .guild-id-display span:hover {
+            /* সোনালী */
+            color: #FFD700;
+        }
+
+        .join-button {
+            /* সোনালী থেকে কমলা গ্রেডিয়েন্ট (লাল থিমের সাথে মানানসই) */
+            background: linear-gradient(90deg, #FFA07A, #FF6347);
+            border: none;
+            border-radius: 15px;
+            padding: 15px 40px;
+            font-size: 1.6em;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            /* গাঢ় লাল */
+            color: #660000;
+            cursor: pointer;
+            /* লাল শ্যাডো */
+            box-shadow: 0 0 20px rgba(255, 99, 71, 0.7), 0 0 40px rgba(255, 69, 0, 0.4);
+            transition: all 0.3s ease-in-out;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .join-button:hover {
+            /* কমলা থেকে সোনালী গ্রেডিয়েন্ট */
+            background: linear-gradient(90deg, #FF6347, #FFA07A);
+            transform: translateY(-5px);
+            /* লাল শ্যাডো */
+            box-shadow: 0 5px 25px rgba(255, 99, 71, 0.9), 0 10px 50px rgba(255, 69, 0, 0.6);
+        }
+
+        .join-button:active {
+            transform: translateY(0);
+            /* হালকা লাল শ্যাডো */
+            box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+        }
+
+        #qrcode-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            z-index: 3;
+        }
+
+        #qrcode-container.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        #qrcode-container canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #qrcode-container button {
+            display: block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="settings-icon" onclick="toggleQrCode()">&#9881;</div>
+
+        <div class="guild-logo-container">
+            <img src="https://files.catbox.moe/xg3si9.png" alt="Grandmaster Guild Logo" class="guild-logo">
+        </div>
+
+        <div class="guild-name">Xenon_Force</div>
+        <div id="guildIdDisplay" class="guild-id-display">
+        </div>
+
+        <button class="join-button" onclick="window.open('https://ffshare.garena.com/?region=BD&lang=en&action=locate_clan&clan_id=3082419148&version=OB49')">Join Guild</button>
+    </div>
+
+    <div id="qrcode-container">
+        <canvas id="qrcode"></canvas>
+        <button onclick="toggleQrCode()">Close</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        const qrCodeContainer = document.getElementById('qrcode-container');
+        const qrcodeCanvas = document.getElementById('qrcode');
+        let qrcode;
+
+        function generateQrCode(text) {
+            qrcode = new QRCode(qrcodeCanvas, {
+                text: text,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        function toggleQrCode() {
+            qrCodeContainer.classList.toggle('show');
+            if (qrCodeContainer.classList.contains('show') && !qrcode) {
+                // Replace this with the data you want to encode in the QR code
+                const qrCodeData = "https://files.catbox.moe/1ydyy0.png"; // This will be for QR code, not the join button
+                generateQrCode(qrCodeData);
+            } else if (!qrCodeContainer.classList.contains('show') && qrcode) {
+                qrcode.clear();
+                qrcode = undefined;
+            }
+        }
+
+        // The showGuildCode and copyGuildId functions are no longer directly used by the "Join Guild" button
+        // but are kept here in case you want to use them for something else (e.g., displaying the ID elsewhere).
+        function showGuildCode() {
+            const guildId = "3082419148";
+            const displayElement = document.getElementById("guildIdDisplay");
+
+            if (displayElement.classList.contains('visible')) {
+                displayElement.classList.remove('visible');
+                displayElement.innerHTML = '';
+            } else {
+                displayElement.innerHTML = `GUILD ID ${guildId} <span onclick="copyGuildId('${guildId}')">&#128203;</span>`;
+                displayElement.classList.add('visible');
+            }
+        }
+
+        function copyGuildId(id) {
+            navigator.clipboard.writeText(id).then(() => {
+                alert("Guild ID Copied!");
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert("Guild ID Sorry Try again " + id);
+            });
+        }
+    </script>
+</body>
+</html>

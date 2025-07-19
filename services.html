@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products & Services</title> <!-- Title updated for clarity -->
+    <link rel="stylesheet" href="styl22.css"> <!-- Your existing CSS link -->
+
+    <style>
+        /* CSS for blur animation on page load */
+        body {
+            opacity: 0;
+            filter: blur(10px);
+            transition: opacity 1s ease-out, filter 1s ease-out; /* Smooth transition for opacity and blur */
+            /* Ensure background and text color from styl22.css are applied or set here if needed */
+        }
+
+        body.loaded {
+            opacity: 1;
+            filter: blur(0);
+        }
+    </style>
+</head>
+<body>
+
+    <main class="product-grid">
+        <!-- Product Box 1: Lite -->
+        <div class="product-box lite">
+            <h2>Bluestacks 6</h2>
+            <p>Minimal installation<br>For the First time in our Website </p>
+            <a href="YOUR_DOWNLOAD_LINK_1_HERE" class="download-button">Download</a>
+        </div>
+
+        <!-- Product Box 2: Standard -->
+        <div class="product-box standard">
+            <h2>AtomOS 10 Standard</h2>
+            <p>Balanced installation<br>Perfect balance between features and performance. Recommended for most users.</p>
+            <a href="YOUR_DOWNLOAD_LINK_2_HERE" class="download-button">Download</a>
+        </div>
+
+        <!-- Product Box 3: Ultimate (Premium) -->
+        <div class="product-box ultimate premium">
+            <span class="badge">Premium</span>
+            <h2>AtomOS 10 Ultimate</h2>
+            <p>The world's most compact, lightweight, and cleanest build you'll ever experience.</p>
+            <a href="YOUR_DOWNLOAD_LINK_3_HERE" class="download-button premium-button">Get Premium Download</a>
+        </div>
+
+        <!-- Product Box 4: Lite -->
+        <div class="product-box lite">
+            <h2>Product Name 4 (Lite)</h2>
+            <p>A simple and efficient version. Ideal for quick tasks and resource-saving.</p>
+            <a href="YOUR_DOWNLOAD_LINK_4_HERE" class="download-button">Download</a>
+        </div>
+
+        <!-- Product Box 5: Standard -->
+        <div class="product-box standard">
+            <h2>Product Name 5 (Standard)</h2>
+            <p>A robust and versatile option, offering a great mix of features and stability.</p>
+            <a href="YOUR_DOWNLOAD_LINK_5_HERE" class="download-button">Download</a>
+        </div>
+
+        <!-- Product Box 6: Lite -->
+        <div class="product-box lite">
+            <h2>Product Name 6 (Lite)</h2>
+            <p>Designed for minimal footprint and maximum compatibility on older systems.</p>
+            <a href="YOUR_DOWNLOAD_LINK_6_HERE" class="download-button">Download</a>
+        </div>
+
+        <!-- Product Box 7: Standard -->
+        <div class="product-box standard">
+            <h2>Product Name 7 (Standard)</h2>
+            <p>The go-to choice for everyday use, providing essential tools and smooth operation.</p>
+            <a href="YOUR_DOWNLOAD_LINK_7_HERE" class="download-button">Download</a>
+        </div>
+
+        <!-- Product Box 8: Ultimate (Premium) -->
+        <div class="product-box ultimate premium">
+            <span class="badge">Premium</span>
+            <h2>Product Name 8 (Ultimate)</h2>
+            <p>Unleash the full potential with advanced features and unparalleled performance.</p>
+            <a href="YOUR_DOWNLOAD_LINK_8_HERE" class="download-button premium-button">Get Premium Download</a>
+        </div>
+
+        <!-- Product Box 9: Standard -->
+        <div class="product-box standard">
+            <h2>Product Name 9 (Standard)</h2>
+            <p>A well-rounded package that delivers consistent performance across all devices.</p>
+            <a href="YOUR_DOWNLOAD_LINK_9_HERE" class="download-button">Download</a>
+        </div>
+    </main>
+
+    <script>
+        // JavaScript to add 'loaded' class after the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

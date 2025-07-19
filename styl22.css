@@ -1,0 +1,222 @@
+/* Initial overlay for the whole page/grid */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: 9999; /* Ensure it's on top */
+    opacity: 1;
+    pointer-events: none; /* Allows clicks to pass through */
+    transition: opacity 1.5s ease-out; /* Smooth transition for overlay removal */
+}
+
+body.loaded::before {
+    opacity: 0; /* Remove overlay when loaded */
+}
+
+
+/* Keyframe for the dynamic "bounce-in-up" effect */
+@keyframes bounceInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(100px) scale(0.8) rotateX(-90deg); /* Start far down, smaller, rotated */
+        filter: blur(15px);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateY(-20px) scale(1.05) rotateX(10deg); /* Overshoot slightly up, larger, slight rotation */
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg); /* Final position, size, and rotation */
+        filter: blur(0);
+    }
+}
+
+/* Initial state for all product boxes */
+.product-box {
+    opacity: 0; /* Start invisible */
+    transform: translateY(100px) scale(0.8) rotateX(-90deg); /* Apply initial state matching 0% of keyframe */
+    filter: blur(15px); /* Apply initial blur matching 0% of keyframe */
+    /* No direct transition here, it's handled by the animation property */
+}
+
+/* Apply animation with staggered delays when the body has the 'loaded' class */
+body.loaded .product-box {
+    animation: bounceInUp 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; /* Cubic-bezier for bounce effect */
+}
+
+/* Staggered delays for each product box */
+body.loaded .product-box:nth-child(1) { animation-delay: 0.2s; }
+body.loaded .product-box:nth-child(2) { animation-delay: 0.3s; }
+body.loaded .product-box:nth-child(3) { animation-delay: 0.4s; }
+body.loaded .product-box:nth-child(4) { animation-delay: 0.5s; }
+body.loaded .product-box:nth-child(5) { animation-delay: 0.6s; }
+body.loaded .product-box:nth-child(6) { animation-delay: 0.7s; }
+body.loaded .product-box:nth-child(7) { animation-delay: 0.8s; }
+body.loaded .product-box:nth-child(8) { animation-delay: 0.9s; }
+body.loaded .product-box:nth-child(9) { animation-delay: 1.0s; }
+/* Add more :nth-child rules if you have more product boxes */
+
+
+/* --- END ULTIMATE DHAMAKE DAR ANIMATION --- */
+
+
+/* --- Example Base Styles for your Product Grid (Add or adjust as needed) --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    min-height: 100vh; /* Ensure full viewport height */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    overflow-x: hidden; /* Prevent horizontal scroll during animation */
+}
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; /* Similar font feel */
+    background-color: #0d0d0d; /* Very dark background */
+    color: #e0e0e0; /* Light text color for general content */
+    margin: 20;
+    padding: 20;
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    min-height: 100vh; /* Full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.product-grid {
+    display: flex; /* Use flexbox for horizontal arrangement */
+    gap: 25px; /* Space between cards */
+    padding: 40px;
+    justify-content: center; /* Center cards if there's extra space */
+    flex-wrap: wrap; /* Allow cards to wrap to the next line on smaller screens */
+    max-width: 1200px; /* Optional: Limit max width of the grid for better layout on very wide screens */
+}
+
+.product-box {
+    background-color: #1a1a1d; /* Dark bluish-grey background for cards */
+    border-radius: 10px; /* Slightly rounded corners */
+    padding: 30px;
+    text-align: left; /* Align text to the left as in screenshot */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    width: 320px; /* Fixed width for each card as per screenshot */
+    min-height: 200px; /* Minimum height for consistency */
+    border: 1px solid #2a2a2e; /* Subtle border matching the dark theme */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.product-box:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6); /* Enhanced shadow on hover */
+}
+
+.product-box h2 {
+    color: #f0f0f0; /* Lighter text for titles */
+    margin-top: 0;
+    margin-bottom: 10px; /* Closer to description */
+    font-size: 1.6em; /* Slightly larger title */
+    font-weight: 600; /* Semi-bold title */
+}
+
+.product-box p {
+    color: #a0a0a0; /* Subtler grey for descriptions */
+    line-height: 1.5;
+    margin-bottom: 30px; /* More space before the button */
+    font-size: 0.95em;
+    flex-grow: 1; /* Allows description to take up available space */
+}
+
+/* Common button styles */
+.download-button {
+    display: block; /* Make button take full width */
+    width: calc(100% - 0px); /* Adjust for padding to make it full width inside box */
+    padding: 14px 0; /* More vertical padding */
+    border-radius: 8px; /* More rounded button corners */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.0em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+    border: none; /* No default border */
+    margin-top: auto; /* Pushes the button to the bottom */
+}
+
+/* Specific styles for Lite and Standard buttons */
+.product-box.lite .download-button,
+.product-box.standard .download-button {
+    background-color: #2e2e33; /* Darker grey background for buttons */
+    color: #f0f0f0; /* Light text on dark button */
+    border: 1px solid #444448; /* Subtle border for these buttons */
+}
+
+.product-box.lite .download-button:hover,
+.product-box.standard .download-button:hover {
+    background-color: #3d3d42; /* Slightly lighter on hover */
+    border-color: #55555a;
+}
+
+/* Specific styles for the "Ultimate (Premium)" box */
+.product-box.ultimate.premium {
+    background-color: #1a1a2a; /* Slightly different dark blue for premium, more like the screenshot */
+    border: 1px solid #ffaa00; /* Orange-gold border for premium */
+    box-shadow: 0 0 20px rgba(255, 170, 0, 0.3); /* Orange-gold glow */
+    transform: scale(1.02); /* Slightly larger by default, as it looks in the image */
+}
+
+.product-box.ultimate.premium:hover {
+    transform: scale(1.05) translateY(-5px); /* More pronounced lift and scale on hover */
+    box-shadow: 0 15px 30px rgba(255, 170, 0, 0.5); /* Stronger glow on hover */
+}
+
+.product-box.ultimate.premium .badge {
+    position: absolute;
+    top: 20px; /* Adjusted position */
+    right: 20px; /* Adjusted position */
+    background-color: #ffaa00; /* Orange-gold badge background */
+    color: #1a1a2a; /* Dark text on gold badge */
+    padding: 6px 12px; /* More padding */
+    border-radius: 5px; /* Rounded badge corners */
+    font-weight: bold;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Premium button specific styles */
+.product-box.ultimate.premium .premium-button {
+    background-color: #ffaa00; /* Orange-gold button for premium */
+    color: #1a1a2a; /* Dark text on gold button */
+    font-weight: bold;
+}
+
+.product-box.ultimate.premium .premium-button:hover {
+    background-color: #e69500; /* Slightly darker gold on hover */
+    color: #0d0d0d; /* Even darker text on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .product-grid {
+        padding: 20px;
+    }
+
+    .product-box {
+        width: calc(100% - 60px); /* Adjust width to account for padding */
+        max-width: 380px; /* Limit max width for readability */
+        margin-bottom: 20px; /* Add space between stacked cards */
+    }
+}

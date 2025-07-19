@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimize Your Experience - With Opening Animation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for easier theme management */
+        :root {
+            --primary-blue: #007bff; /* A standard blue */
+            --dark-heading: #e0e0e0; /* Light text for headings */
+            --light-text: #a0a0a0; /* Lighter text for paragraphs */
+            --bg-light: #1a1a1a; /* Dark background for the section */
+            --card-bg: #2c2c2c; /* Darker background for cards */
+            --card-shadow: 0 4px 15px rgba(58, 58, 58, 0.3); /* Subtle shadow for cards */
+            --faint-number-color: rgba(255, 255, 255, 0.05); /* Very light color for background numbers */
+            --svg-line-color: #004d99; /* Darker blue for the SVG line */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--light-text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevents horizontal scrollbar */
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            padding: 40px 20px; /* More vertical padding for overall section */
+            box-sizing: border-box;
+            text-align: center;
+            /* Animation for the whole container */
+            animation: fadeInAndBlurOut 1s ease-out forwards;
+        }
+
+        /* Keyframes for the main container animation (blurry start, clear end) */
+        @keyframes fadeInAndBlurOut {
+            from {
+                opacity: 0;
+                filter: blur(20px);
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            margin-bottom: 80px; /* More space below header to separate from features */
+        }
+
+        header h5 {
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            letter-spacing: 0.08em; /* Slightly more spaced out letters */
+            font-weight: 600;
+        }
+
+        header h1 {
+            font-size: 3em; /* Larger, bolder heading */
+            margin-bottom: 20px;
+            color: var(--dark-heading);
+            font-weight: 700;
+        }
+
+        header p {
+            max-width: 650px; /* Wider paragraph text */
+            margin: 0 auto 40px auto;
+            font-size: 1.05em;
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        .btn {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px 35px; /* Larger button */
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.25); /* Stronger shadow for button */
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px); /* More pronounced lift */
+        }
+
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Spreads out cards */
+            align-items: center; /* Vertically centers items if they have different heights */
+            position: relative; /* Essential for positioning SVG and numbers */
+            padding: 100px 0; /* Plenty of space for the SVG line to flow */
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            text-align: left;
+            flex: 0 0 calc(33.33% - 40px); /* Exactly 3 cards per row with gap */
+            max-width: 380px; /* Control max width */
+            box-sizing: border-box;
+            position: relative;
+            z-index: 10; /* Ensures cards are on top of everything else */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) !important; /* Lift card on hover, !important to override inline styles */
+            box-shadow: 0 8px 25px rgba(207, 207, 207, 0.2); /* More pronounced shadow on hover */
+        }
+
+        .feature-card h3 {
+            color: var(--dark-heading);
+            margin-top: 0;
+            font-size: 1.6em; /* Slightly larger feature heading */
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--light-text);
+            line-height: 1.7;
+            font-size: 0.98em;
+        }
+
+        .feature-card .icon {
+            font-size: 3.5em; /* Larger icon size */
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Large background numbers */
+        .feature-number {
+            position: absolute;
+            font-size: 16em; /* Very large number */
+            color: var(--faint-number-color);
+            font-weight: 700;
+            z-index: 1; /* Below cards, above SVG */
+            pointer-events: none; /* Makes numbers unclickable */
+            line-height: 1;
+            /* Animation for numbers */
+            animation: fadeInAndBlurOutNumber 1s ease-out forwards;
+            /* Stagger delay */
+            animation-delay: var(--delay, 0s); /* Default delay, can be overridden by inline style */
+        }
+
+        /* Individual number delays (set via custom property --delay) */
+        .number-one { top: 30%; left: 10%; transform: translateX(-50%); --delay: 0.1s; }
+        .number-two { top: 20%; left: 50%; transform: translateX(-50%); --delay: 0.2s; }
+        .number-three { top: 30%; right: 10%; transform: translateX(50%); --delay: 0.3s; }
+
+        @keyframes fadeInAndBlurOutNumber {
+            from {
+                opacity: 0;
+                filter: blur(15px);
+                transform: translateY(25px) translateX(var(--translateX-initial, 0)); /* Use var for initial translateX */
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0) translateX(var(--translateX-final, var(--translateX-initial, 0))); /* Retain final translateX */
+            }
+        }
+
+
+        /* SVG Container for the Wavy Line */
+        .wavy-line-svg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows mouse events to pass through */
+            z-index: 5; /* Between cards and background numbers */
+            overflow: hidden; /* Ensures SVG doesn't cause overflow on narrow screens */
+            /* Animation for SVG */
+            animation: fadeInAndBlurOutSVG 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInAndBlurOutSVG {
+            from {
+                opacity: 0;
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        .wavy-line-svg-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wavy-line-svg-container path {
+            stroke: var(--svg-line-color);
+            stroke-width: 4px; /* Line thickness */
+            fill: none; /* No fill for the line itself */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .feature-card {
+                flex: 0 0 calc(50% - 30px); /* 2 cards per row */
+                margin-bottom: 40px; /* Space between rows */
+                /* Reset alignment and transform for 2-column layout */
+                transform: translateY(0%) !important; /* Override inline style */
+            }
+            .feature-card:nth-child(2) {
+                margin-top: 0; /* Reset specific margin */
+                margin-bottom: 40px;
+            }
+            .number-one, .number-two, .number-three {
+                font-size: 12em;
+            }
+            .features-grid {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            .features-grid {
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+            }
+            .feature-card {
+                width: 90%;
+                max-width: 400px;
+                margin-bottom: 30px;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                /* Reset any specific margins from desktop layout */
+                margin-top: 0 !important;
+                transform: translateY(0%) !important; /* Reset transform for mobile */
+            }
+            .feature-number {
+                font-size: 8em;
+                position: relative; /* Change to relative for simpler mobile positioning */
+                margin-bottom: -50px; /* Pull numbers up */
+                opacity: 0.2; /* Make them slightly more visible on mobile if needed */
+                transform: none; /* Reset transform */
+                animation: none !important; /* Remove animation on mobile */
+            }
+            .wavy-line-svg-container {
+                display: none; /* Hide SVG on very small screens for simplicity */
+                animation: none !important; /* Remove animation on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h5>OPTIMIZE BOTH YOUR DEVICE AND GAME</h5>
+            <h1>PREMIUM OS</h1>
+            <p>Premium OS is the best for games, ensuring peak performance and an immersive experience.</p>
+           <a href="https://sub4unlock.io/EqS8s" class="btn" target="_blank">Get Premium OS</a>
+        </header>
+
+        <section class="features-grid">
+            <span class="feature-number number-one">1</span>
+            <span class="feature-number number-two">2</span>
+            <span class="feature-number number-three">3</span>
+
+            <div class="wavy-line-svg-container">
+                <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice">
+                    <path d="M0,250 C200,100 400,300 600,150 C800,0 1000,300 1200,100"
+                          stroke="var(--svg-line-color)" stroke-width="4" fill="none" />
+                </svg>
+            </div>
+
+            <div class="feature-card" style="transform: translateY(80px);">
+                <div class="icon">☁️</div> <h3>CPU usage</h3>
+                <p>We've reduced background CPU spikes significantly. Nothing that you don't need will run in the background.</p>
+            </div>
+
+            <div class="feature-card" style="transform: translateY(-80px);">
+                <div class="icon">☁️</div>
+                <h3>RAM usage</h3>
+                <p>Thanks to Premium OS we've seen ~1.0 GB of RAM usage freed on boot, which can then be allocated to other tasks.</p>
+            </div>
+
+            <div class="feature-card" style="transform: translateY(80px);">
+                <div class="icon">☁️</div>
+                <h3>Higher FPS in games</h3>
+                <p>Higher average framerates observed in competitive titles like Valorant on Windows 11.
+
+Ryzen 7 5800X3D, 16GB 3600MHz, RTX 2070 Super</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

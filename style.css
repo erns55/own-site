@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+.home-img,
+.home-content h1,
+.home-content .typing-text,
+.home-content p,
+.social-icons,
+.btn {
+    opacity: 0; /* Start invisible */
+    transform: translateY(20px) scale(0.95); /* Start slightly down and smaller */
+    filter: blur(5px); /* Start blurred */
+}
+
+/* Keyframe for the main "unveil" animation */
+@keyframes unveilContent {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Apply animation with delays to create a staggered effect */
+body.loaded .home-img {
+    animation: unveilContent 1.2s ease-out forwards;
+    animation-delay: 0.3s; /* Delay for image */
+}
+
+body.loaded .home-content h1 {
+    animation: unveilContent 1.2s ease-out forwards;
+    animation-delay: 0.6s; /* Delay for H1 */
+}
+
+body.loaded .home-content .typing-text {
+    animation: unveilContent 1.2s ease-out forwards;
+    animation-delay: 0.9s; /* Delay for typing text */
+}
+
+body.loaded .home-content p {
+    animation: unveilContent 1.2s ease-out forwards;
+    animation-delay: 1.2s; /* Delay for paragraph */
+}
+
+body.loaded .social-icons {
+    animation: unveilContent 1.2s ease-out forwards;
+    animation-delay: 1.5s; /* Delay for social icons */
+}
+
+body.loaded .btn {
+    animation: unveilContent 1.2s ease-out forwards;
+    animation-delay: 1.8s; /* Delay for button */
+}
+
+/* --- END DHAMAKE DAR ANIMATION --- */
+
+
+/* Rest of your existing CSS (Example basic styles) */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    /* Remove any direct blur/opacity from body if you had it for the previous animation */
+    /* filter: blur(0) !important; */ /* Ensure body itself is not blurred */
+    /* opacity: 1 !important; */
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: black;
+    color: white;
+}
+
+header{
+    margin-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 9%;
+    background-color: transparent;
+    filter: drop-shadow(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo{
+    font-size: 3rem;
+    color: #0400fc;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.logo:hover{
+    transform: scale(1.1);
+}
+
+nav a{
+    font-size: 1.8rem;
+    color: white;
+    margin-left: 4rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+nav a:hover,
+nav a.active{
+    color: #0400fc;
+    border-bottom: 3px solid #0400fc;
+}
+
+@media(max-width:995px){
+    nav{
+        position: absolute;
+        display: none;
+        top: 0;
+        right: 0;
+        width: 40%;
+        border-left: 3px solid #0400fc;
+        border-bottom: 3px solid #0400fc;
+        border-bottom-left-radius: 2rem;
+        padding: 1rem solid;
+        background-color: #161616;
+        border-top: 0.1rem solid rgba(0,0,0,0.1);
+    }
+
+    nav.active{
+        display: block;
+    }
+
+    nav a{
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+    }
+
+    nav a:hover,
+    nav a.active{
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.5rem solid #0400fc;
+    }
+}
+
+section{
+    min-height: 100vh;
+    padding: 5rem 9% 5rem;
+}
+
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8rem;
+    background-color: black;
+}
+
+.home .home-content h1{
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+span{
+    color: #0400fc;
+}
+
+.home-content h3{
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.home-content p{
+    font-size: 1.6rem;
+}
+
+.home-img{
+    border-radius: 50%;
+}
+
+.home-img img{
+    position: relative;
+    width: 32vw;
+    border-radius: 50%;
+    box-shadow: 0 0 25px solid #0400fc;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.home-img img:hover{
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.social-icons a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: transparent;
+    border: 0.2rem solid #0400fc;
+    font-size: 2rem;
+    border-radius: 50%;
+    margin: 3rem 1.5rem 3rem 0;
+    transition: 0.3s ease;
+    color: #0400fc;
+}
+
+.social-icons a:hover{
+    color: black;
+    transform: scale(1.3) translateY(-5px);
+    background-color: #0400fc;
+    box-shadow: 0  0 25px #0400fc;
+}
+
+.btn{
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background-color: black;
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color: #0400fc;
+    letter-spacing: 0.3rem;
+    font-weight: 600;
+    border: 2px solid #0400fc;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale3d(1.03);
+    background-color: #0400fc;
+    color: black;
+    box-shadow: 0 0 25px #0400fc;
+}
+
+.typing-text{
+    font-size: 34px;
+    font-weight: 600;
+    min-width: 280px;
+}
+
+.typing-text span{
+    position: relative;
+}
+
+.typing-text span::before{
+    content: "software Developer";
+    color: #0400fc;
+    animation: words 20s infinite;
+}
+
+.typing-text span::after{
+    content: "";
+    background-color: black;
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 100%;
+    border-left: 3px solid black;
+    right: -8;
+    animation: cursor 0.6s infinite;
+}
+
+@keyframes cursor{
+    to{
+        border-left: 3px solid #0400fc;
+    }
+}
+
+@keyframes words{
+    0%, 20%{
+        content: "Youtuber";
+    }
+    21%, 40%{
+        content: "Developer";
+    }
+    41%, 60%{
+        content: "Pc Optimizer";
+    }
+    61%, 80%{
+        content: "Emulator Moder";
+    }
+    81%, 100%{
+        content: "Windows lite expert";
+    }
+}
+
+@media (max-width: 1000px){
+    .home{
+        gap: 4rem;
+    }
+}
+
+@media(max-width:995px){
+    .home{
+        flex-direction: column;
+        margin: 5rem 4rem;
+    }
+
+    .home .home-content h3{
+        font-size: 2.5rem;
+    }
+
+    .home-content h1{
+        font-size: 5rem;
+    }
+
+    .home-img img{
+        width: 70vw;
+        margin-top: 4rem;
+    }
+}
